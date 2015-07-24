@@ -6,6 +6,11 @@ module.exports = {
   },
   module: {
     loaders: [
+      {
+        test: /\.jsx?$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: 'babel'
+      },
       { test: /\.css$/, exclude: /\.useable\.css$/, loader: "style!css" },
       { test: /\.useable\.css$/, loader: "style/useable!css" },
       {
