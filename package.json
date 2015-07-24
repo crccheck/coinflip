@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/crccheck/coinflip",
   "devDependencies": {
+    "css-loader": "^0.15.5",
     "node-sass": "^3.2.0",
     "sass-loader": "^1.0.3",
     "style-loader": "^0.12.3",
