@@ -1,0 +1,27 @@
+{
+  "name": "coinflip",
+  "version": "0.0.0",
+  "description": "",
+  "main": "app.bundle.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/crccheck/coinflip.git"
+  },
+  "author": "Chris Chang <c@crccheck.com> (http://crccheck.com/blog)",
+  "license": "bsd3",
+  "bugs": {
+    "url": "https://github.com/crccheck/coinflip/issues"
+  },
+  "homepage": "https://github.com/crccheck/coinflip",
+  "devDependencies": {
+    "node-sass": "^3.2.0",
+    "sass-loader": "^1.0.3",
+    "style-loader": "^0.12.3",
+    "webpack": "^1.10.5",
+    "webpack-dev-server": "^1.10.1"
+  }
+}
