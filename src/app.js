@@ -12,7 +12,7 @@ class App extends React.Component {
     this.state = {
       input: '',
       cardinality: 0,
-      counts: {}
+      counts: {},
       runStats: {}
     };
   }
