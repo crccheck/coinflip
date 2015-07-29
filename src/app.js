@@ -20,14 +20,10 @@ class App extends React.Component {
     return _.countBy(arr, (x) => x)
   }
 
-  cardinality(str) {
-    return _.uniq(str.split('')).length;
-  }
-
   textInput(e) {
     const input = this.refs.input.value.replace(/\s+/g, '');
-    const cardinality = this.cardinality(input);
     const counts = this.counts(input.split(''));
+    const cardinality = _.keys(counts).length;
     this.setState({input, cardinality, counts});
   }
 
