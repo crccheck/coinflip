@@ -13,18 +13,19 @@ class App extends React.Component {
       input: '',
       cardinality: 0,
       counts: {}
+      runStats: {}
     };
-  }
-
-  counts(arr) {
-    return _.countBy(arr, (x) => x)
   }
 
   textInput(e) {
     const input = this.refs.input.value.replace(/\s+/g, '');
-    const counts = this.counts(input.split(''));
+    const counts = _.countBy(input.split(''), (x) => x)
     const cardinality = _.keys(counts).length;
-    this.setState({input, cardinality, counts});
+
+    const runData = _.map(input.match(/(.)\1*/g), (str) => [str[0], str.length]);
+    const runStats = _.countBy(runData, (x) => x[1]);
+
+    this.setState({input, cardinality, counts, runData, runStats});
   }
 
   render() {
@@ -38,6 +39,10 @@ class App extends React.Component {
         <div>
           Counts:
           <ul>{counts}</ul>
+        </div>
+        <div>
+          Runs:
+          <ul>{_.map(this.state.runStats, (v, k) => <li key={k}>{k}: {v}</li>)}</ul>
         </div>
       </div>
     )
