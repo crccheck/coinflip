@@ -2,13 +2,17 @@ console.log('hello')
 const css = require('../style/app.scss');
 
 import React from 'react';
-
+import ReactDOM from 'react-dom';
 
 class App extends React.Component {
+  textInput(e) {
+    console.log(this.refs.input, e)
+  }
+
   render() {
     return (
       <div>
-        <textarea/>
+        <textarea ref="input" onKeyUp={this.textInput.bind(this)}/>
       </div>
     )
   }
@@ -16,4 +20,4 @@ class App extends React.Component {
 
 
 // main
-React.render(<App/>, document.getElementById('app'));
+ReactDOM.render(<App/>, document.getElementById('app'));
