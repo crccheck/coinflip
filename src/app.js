@@ -11,8 +11,13 @@ class App extends React.Component {
     super(props);
     this.state = {
       input: '',
-      cardinality: 0
+      cardinality: 0,
+      counts: {}
     };
+  }
+
+  counts(arr) {
+    return _.countBy(arr, (x) => x)
   }
 
   cardinality(str) {
@@ -20,16 +25,24 @@ class App extends React.Component {
   }
 
   textInput(e) {
-    var input = this.refs.input.value.replace(/\s+/g, '');
-    var cardinality = this.cardinality(input);
-    this.setState({input, cardinality});
+    const input = this.refs.input.value.replace(/\s+/g, '');
+    const cardinality = this.cardinality(input);
+    const counts = this.counts(input.split(''));
+    this.setState({input, cardinality, counts});
   }
 
   render() {
+    const counts = _.map(
+      this.state.counts, (v, k) => <li key={k}>{k}: {v}</li>
+    );
     return (
       <div>
         <textarea ref="input" onKeyUp={this.textInput.bind(this)}/>
         Unique: <span>{this.state.cardinality}</span>
+        <div>
+          Counts:
+          <ul>{counts}</ul>
+        </div>
       </div>
     )
   }
