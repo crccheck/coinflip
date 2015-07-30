@@ -34,7 +34,9 @@ class App extends React.Component {
     );
     return (
       <div>
-        <textarea ref="input" onKeyUp={this.textInput.bind(this)}/>
+        <form>
+          <textarea name="input" ref="input" onKeyUp={this.textInput.bind(this)}/>
+        </form>
         Unique: <span>{this.state.cardinality}</span>
         <div>
           Counts:
