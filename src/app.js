@@ -13,19 +13,33 @@ class App extends React.Component {
       input: '',
       cardinality: 0,
       counts: {},
-      runStats: {}
+      runStats: {},
+      runStatsSplit: {}
     };
   }
 
   textInput(e) {
     const input = this.refs.input.value.replace(/\s+/g, '');
-    const counts = _.countBy(input.split(''), (x) => x)
-    const cardinality = _.keys(counts).length;
+    const counts = _.countBy(input.split(''))
+    const choices = _.keys(counts);
+    const cardinality = choices.length;
 
     const runData = _.map(input.match(/(.)\1*/g), (str) => [str[0], str.length]);
     const runStats = _.countBy(runData, (x) => x[1]);
 
-    this.setState({input, cardinality, counts, runData, runStats});
+    const runDataSplit = {};
+    _.each(runData, (x) => {
+      if (!runDataSplit[x[0]]) {
+        runDataSplit[x[0]] = [];
+      }
+      runDataSplit[x[0]].push(x[1]);
+    })
+    const runStatsSplit = {};
+    _.each(runDataSplit, (v, k) => {
+      runStatsSplit[k] = _.countBy(v)
+    })
+
+    this.setState({input, cardinality, counts, runStats, runStatsSplit});
   }
 
   render() {
@@ -45,6 +59,22 @@ class App extends React.Component {
         <div>
           Runs:
           <ul>{_.map(this.state.runStats, (v, k) => <li key={k}>{k}: {v}</li>)}</ul>
+        </div>
+        <div>
+          Runs by each choice:
+          <ul>
+          {
+            _.map(this.state.runStatsSplit, (values, k) => {
+              return (
+                <li key={k}>
+                  {k}:
+                  <ul>{_.map(values, (count, runLength) => <li key={runLength}>{runLength}: {count}</li>)}
+                  </ul>
+                </li>
+              )
+            })
+          }
+          </ul>
         </div>
       </div>
     )
